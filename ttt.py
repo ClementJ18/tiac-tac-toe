@@ -104,7 +104,7 @@ class TicTacToe:
         if not player in self.plyrs.keys():
             raise ValueError("Must be one of the two players")
 
-        if player == "ai":
+        if player == "ai" or not value:
             value = self.comp_move()
 
         if self.validate(value):

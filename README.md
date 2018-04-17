@@ -9,15 +9,18 @@ from ttt import TicTacToe
 game = TicTacToe(X="Bob", O="John")
 
 while not game.game_over():
-    test = input(">>> ")
-    while not game.validate(test):
-        test = input(">>> ")
-    game.play("Bob", test)
+    value = input(">>> ")
+    while not game.validate(value):
+        value = input(">>> ")
+    game.play("Bob", value)
+
     print(game.print_board())
-    test = input(">>> ")
-    while not game.validate(test):
-        test = input(">>> ")
-    game.play("John", test)
+
+    value = input(">>> ")
+    while not game.validate(value):
+        value = input(">>> ")
+    game.play("John", value)
+
     print(game.print_board())
 
 print(game.print_board())
@@ -31,12 +34,15 @@ from ttt import TicTacToe
 game = TicTacToe(X="Bob", O="ai")
 
 while not game.game_over():
-    test = input(">>> ")
-    while not game.validate(test):
-        test = input(">>> ")
-    game.play("Bob", test)
+    value = input(">>> ")
+    while not game.validate(value):
+        value = input(">>> ")
+    game.play("Bob", value)
+
     print(game.print_board())
-    game.play("ai", test)
+
+    game.play("ai")
+    
     print(game.print_board())
 
 print(game.print_board())
