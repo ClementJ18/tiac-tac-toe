@@ -39,35 +39,35 @@ class TicTacToe:
 
         return "------------\n".join(msg)
 
-    def comp_move(self, b):
+    def comp_move(self):
         #check if any of our moves can win
-        for row in b:
+        for row in self.board:
             for e in row:
                 if e not in ["O", "X"]:
                     num = int(e)
-                    copy_b = [x.copy() for x in b]
-                    copy_b[b.index(row)][row.index(e)] = "X"
+                    copy_b = [x.copy() for x in self.board]
+                    copy_b[self.board.index(row)][row.index(e)] = "X"
                     if self.check(copy_b):
                         return num
 
         #check if any of the enemy moves can win
-        for row in b:
+        for row in self.board:
             for e in row:
                 if e not in ["O", "X"]:
                     num = int(e)
-                    copy_b = [x.copy() for x in b]
-                    copy_b[b.index(row)][row.index(e)] = "O"
+                    copy_b = [x.copy() for x in self.board]
+                    copy_b[self.board.index(row)][row.index(e)] = "O"
                     if self.check(copy_b):
                         return num
 
         #take the center
-        if not b[1][1] in ["X", "O"]:
+        if not self.board[1][1] in ["X", "O"]:
             return 5
 
         #take a random corner
         choices = []
         for corner in [1, 3, 7, 9]:
-            if not b[int(corner//3.5)][(corner-1)%3] in ["X", "O"]:
+            if not self.board[int(corner//3.5)][(corner-1)%3] in ["X", "O"]:
                 choices.append(corner)
 
         if len(choices) > 0:
@@ -76,7 +76,7 @@ class TicTacToe:
         choice = []
         #take a random side
         for side in [2, 4, 6, 8]:
-            if not b[int(side//3.5)][(side-1)%3] in ["X", "O"]:
+            if not self.board[int(side//3.5)][(side-1)%3] in ["X", "O"]:
                 choices.append(side)
 
         if len(choices) > 0:
@@ -113,6 +113,8 @@ class TicTacToe:
 
         if self.check(self.board):
             self.winner = player
+
+        return value
 
 
 
