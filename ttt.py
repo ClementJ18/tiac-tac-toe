@@ -11,16 +11,17 @@ class TicTacToe:
         ]
 
     def check(self, b):
-        #horizontal check
-        if ((b[0][0] == "O" and b[0][1] == "O" and b[0][2] == "O") or (b[1][0] == "O" and b[1][1] == "O" and b[1][2] == "O")) or ((b[2][0] == "O" and b[2][1] == "O" and b[2][2] == "O") or (b[0][0] == "X" and b[0][1] == "X" and b[0][2] == "X") or (b[1][0] == "X" and b[1][1] == "X" and b[1][2] == "X") or (b[2][0] == "X" and b[2][1] == "X" and b[2][2] == "X")):
+        #horizontal check 2.0
+        if any(len(set(row)) == 1 for row in b):
             return True
 
-        #vertical check
-        if ((b[0][0] == "O" and b[1][0] == "O" and b[2][0] == "O") or (b[0][1] == "O" and b[1][1] == "O" and b[2][1] == "O")) or ((b[0][2] == "O" and b[1][2] == "O" and b[2][2] == "O") or (b[0][0] == "X" and b[1][0] == "X" and b[2][0] == "X") or (b[0][1] == "X" and b[1][1] == "X" and b[2][1] == "X") or (b[0][2] == "X" and b[1][2] == "X" and b[2][2] == "X")):
+        #vertical check 2.0
+        c = list(map(list, zip(*b))) #transpose
+        if any(len(set(row)) == 1 for row in c):
             return True
 
-        #diagonal check
-        if ((b[0][0] == "O" and b[1][1] == "O" and b[2][2] == "O") or (b[0][2] == "O" and b[1][1] == "O" and b[2][0] == "O")) or ((b[0][0] == "X" and b[1][1] == "X" and b[2][2] == "X") or (b[0][2] == "X" and b[1][1] == "X" and b[2][0] == "X")):
+        #diagonal check 2.0
+        if len(set([b[x][x] for x in range(3)])) == 1 or len(set([b[2 - x][x] for x in range(3)])) == 1:
             return True
 
         return False
@@ -73,7 +74,7 @@ class TicTacToe:
         if len(choices) > 0:
             return random.choice(choices)
 
-        choice = []
+        choices = []
         #take a random side
         for side in [2, 4, 6, 8]:
             if not self.board[int(side//3.5)][(side-1)%3] in ["X", "O"]:
